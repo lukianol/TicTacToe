@@ -2,37 +2,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:weightSum="3" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+id/newGame"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/NewGame" />
-
-        <TableLayout
-            android:id="@+id/playGround"
+    <TableLayout
+            android:id="@+id/header"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-          
-        </TableLayout>
+            android:layout_height="wrap_content"
+            android:stretchColumns="1"
+            android:padding="5dip" >
 
-    </LinearLayout>
-
-    <EditText
-        android:id="@+id/output"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.58"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
+            <TableRow
+                android:id="@+id/tableRow5"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" 
+                              
+                >
+                
+	            <Button
+	                android:id="@+id/newGame"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:gravity="left"	                
+	                android:singleLine="true"
+	                android:text="@string/NewGame" />
+	            
+	            <TextView
+	                android:id="@+id/stroke"
+	                android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:layout_gravity="right"
+	                android:text=""
+	                android:textAppearance="?android:attr/textAppearanceLarge" />
+                
+            </TableRow>
+             
+        </TableLayout> 
+    
+        <TableLayout
+	        android:id="@+id/playGround"
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:gravity="center"
+	        android:weightSum="3" >
+            
+            
+       </TableLayout>
+    
 
 </LinearLayout>

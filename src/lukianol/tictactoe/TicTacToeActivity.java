@@ -6,11 +6,14 @@ import java.util.Map;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.TableRow.LayoutParams;
+import android.widget.TextView;
 
 
 public class TicTacToeActivity extends Activity implements GameEventListener {
@@ -25,17 +28,14 @@ public class TicTacToeActivity extends Activity implements GameEventListener {
     
     void init(){
     	
-    	newGame = (Button)findViewById(R.id.newGame);
-    	
+    	_stroke = (TextView)findViewById(R.id.stroke);
+    	newGame = (Button)findViewById(R.id.newGame);    	
     	newGame.setOnClickListener(new View.OnClickListener() {
 			
 			public void onClick(View v) {
 				new Game(_this, 3);
 			}
 		});
-    	
-    	output = (EditText)findViewById(R.id.output);
-    	
     }
     
 	public void GameStateChanged(final IGame game, GameState gameState) {
@@ -59,7 +59,7 @@ public class TicTacToeActivity extends Activity implements GameEventListener {
 				break;
 		}
 		
-		appendText("Game is " + gameState.toString().toLowerCase());
+		info("Game is " + gameState.toString().toLowerCase());
 		
 	}
 
@@ -73,12 +73,18 @@ public class TicTacToeActivity extends Activity implements GameEventListener {
     	for(int r = 0; r < playGroundSize; r++){
     		
     		TableRow row = new TableRow(this);
+    		row.setGravity(Gravity.CENTER);
+    		LayoutParams params = new LayoutParams();
+    		params.weight = 1;
+    		row.setLayoutParams(params);
     		
     		for(int c = 0; c < playGroundSize; c++){
     			
     			Button cell = new Button(this); 
     			Position position = new Position(c, r);
 				cell.setTag(position);
+				cell.setWidth(106);
+				cell.setHeight(106);
     			cell.setOnClickListener(new View.OnClickListener() {
 
 					public void onClick(View v) {
@@ -90,7 +96,7 @@ public class TicTacToeActivity extends Activity implements GameEventListener {
 							game.Stroke(position);
 							button.setText(stroke.toString().toUpperCase());								
 						} catch (TicTacToeException e) {
-							appendText(e.getMessage());
+							error(e.getMessage());
 						}
 					    
 					}});
@@ -104,17 +110,23 @@ public class TicTacToeActivity extends Activity implements GameEventListener {
 
 	public void CurrentStrokeChanged(IGame game, StrokeKind stroke) {
 
-		appendText("Stroke is changed to : " + stroke.toString().toUpperCase());
+		_stroke.setText(stroke.toString().toUpperCase());
+		info("Stroke is changed to : " + stroke.toString().toUpperCase());
 		
 	}   
 	
-	private void appendText(String text){
-		output.append(String.format("\n%s", text));
+	private void info(String text){
+		Log.i(_className, text);
+	}
+	
+	private void error(String text){
+		Log.e(_className, text);
 	}
 		
 	final private GameEventListener _this = this;
-	private EditText output;
 	private Button newGame;
 	private TableLayout playGround;
 	private Map<Position, Button> _buttonMap;
+	private final String _className = this.getClass().getName();
+	private TextView _stroke;
 }
