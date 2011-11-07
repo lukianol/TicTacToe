@@ -34,7 +34,7 @@
 		<link>
 			<name>domainSrc</name>
 			<type>2</type>
-			<location>E:/Users/Ljuk/workspace/TicTacToeDomain/src</location>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/TicTacToeDomain/src</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
