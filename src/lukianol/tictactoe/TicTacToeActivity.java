@@ -49,9 +49,9 @@ public class TicTacToeActivity extends Activity implements GameEventListener {
 			case Won:
 				game.removeGameEventListener(_this);
 				
-				for(Field field : game.getWonFields()){
+				for(Position position : game.getWonPositions()){
 				
-					_buttonMap.get(field.getPosition()).setBackgroundColor(Color.YELLOW);
+					_buttonMap.get(position).setBackgroundColor(Color.YELLOW);
 				}				
 				break;
 			case Drawn:
@@ -129,4 +129,18 @@ public class TicTacToeActivity extends Activity implements GameEventListener {
 	private Map<Position, Button> _buttonMap;
 	private final String _className = this.getClass().getName();
 	private TextView _stroke;
+	public void onGameStateChanged(IGame game, GameState gameState) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onCurrentStrokeChanged(IGame game, StrokeKind stroke) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void onFieldStroked(IGame game, Field field) {
+		// TODO Auto-generated method stub
+		
+	}
 }
